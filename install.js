@@ -1,19 +1,20 @@
 module.exports = {
   run: [
     {
-      method: "hf.download",
+      method: "shell.run",
       params: {
-        path: ".",
-        _: ["Supertone/supertonic-3"],
-        "repo-type": "space",
-        include: '"assets/onnx/*"',
-        "local-dir": "."
+        venv: "env",
+        path: "app",
+        message: [
+          "uv pip install -r requirements.txt",
+          "python -c \"from supertonic import TTS; TTS(auto_download=True)\""
+        ]
       }
     },
     {
       method: "notify",
       params: {
-        html: "Installation finished! Click 'Open Web UI' to launch Supertonic 3."
+        html: "Installation finished! Click 'Start' to launch Supertonic 3."
       }
     }
   ]
