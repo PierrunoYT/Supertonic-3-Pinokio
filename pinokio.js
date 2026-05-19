@@ -7,8 +7,8 @@ module.exports = {
     let installed = info.exists("assets/onnx/vocoder.onnx")
     let running = {
       install: info.running("install.js"),
-      update: info.running("update.js"),
-      reset: info.running("reset.js")
+      update:  info.running("update.js"),
+      reset:   info.running("reset.js")
     }
 
     if (running.install) {
