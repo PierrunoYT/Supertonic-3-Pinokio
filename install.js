@@ -1,19 +1,20 @@
 module.exports = {
-  requires: {
-    bundle: "ai"
-  },
   run: [
     {
-      method: "shell.run",
+      when: "{{!exists('assets/onnx/vocoder.onnx')}}",
+      method: "hf.download",
       params: {
-        venv: "env",
-        message: ["uv pip install -r requirements.txt"]
+        "_": ["Supertone/supertonic-3"],
+        "repo-type": "space",
+        "include": "assets/onnx/*",
+        "local-dir": ".",
+        "local-dir-use-symlinks": "False"
       }
     },
     {
       method: "notify",
       params: {
-        html: "Installation finished! Click 'Start' to launch Supertonic 3."
+        html: "Installation finished! Click 'Open Web UI' to launch Supertonic 3."
       }
     }
   ]

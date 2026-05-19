@@ -1,4 +1,6 @@
-app
-node_modules
+assets/onnx/
+node_modules/
 .DS_Store
-logs
+logs/
+__pycache__/
+env/
