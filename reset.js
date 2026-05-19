@@ -1,8 +1,10 @@
 module.exports = {
-  run: [{
-    method: "fs.rm",
-    params: {
-      path: "assets/onnx"
+  run: [
+    {
+      method: "fs.rm",
+      params: {
+        path: "assets/onnx"
+      }
     }
-  }]
+  ]
 }
