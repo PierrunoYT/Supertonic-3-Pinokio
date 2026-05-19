@@ -92,10 +92,11 @@ def synthesize(
     elapsed = time.perf_counter() - start_time
 
     audio = np.asarray(wav, dtype=np.float32)
+    duration_seconds = float(np.asarray(duration).reshape(-1)[0]) if np.size(duration) else 0.0
     stats = (
-        f"Generated {duration:.2f}s of audio in {elapsed:.2f}s "
-        f"(RTF {elapsed / duration:.3f})"
-        if duration
+        f"Generated {duration_seconds:.2f}s of audio in {elapsed:.2f}s "
+        f"(RTF {elapsed / duration_seconds:.3f})"
+        if duration_seconds
         else f"Generated audio in {elapsed:.2f}s"
     )
     return (SAMPLE_RATE, audio), stats
