@@ -7,8 +7,7 @@ module.exports = {
         "_": ["Supertone/supertonic-3"],
         "repo-type": "space",
         "include": "assets/onnx/*",
-        "local-dir": ".",
-        "local-dir-use-symlinks": "False"
+        "local-dir": "."
       }
     },
     {
