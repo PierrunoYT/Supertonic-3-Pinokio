@@ -1,7 +1,6 @@
 module.exports = {
   run: [
     {
-      when: "{{!exists('assets/onnx/vocoder.onnx')}}",
       method: "hf.download",
       params: {
         "_": ["Supertone/supertonic-3"],
