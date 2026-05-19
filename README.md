@@ -1,115 +1,63 @@
 <p align="center">
-  <img src="icon.jpeg" alt="DramaBox logo" width="160" />
+  <img src="icon.jpeg" alt="Supertonic 3 logo" width="160" />
 </p>
 
-# DramaBox — Pinokio Launcher
+# Supertonic 3 — Pinokio Launcher
 
-A 1-click Pinokio launcher for [DramaBox](https://github.com/resemble-ai/DramaBox) by Resemble AI — expressive TTS with voice cloning, built on LTX-2.3.
+A 1-click Pinokio launcher for [Supertonic 3](https://github.com/supertone-inc/supertonic) by Supertone — lightning-fast, on-device, multilingual TTS running entirely in your browser via WebGPU/WASM.
 
 ## What It Does
 
-DramaBox is a prompt-driven text-to-speech model with voice cloning. The prompt controls speaker identity, emotion, delivery style, laughs, sighs, pauses and transitions. An optional 10-second voice reference clones the target timbre. It is an IC-LoRA fine-tune of the LTX-2.3 3.3B audio-only model.
+Supertonic 3 is a 99M-parameter ONNX-based text-to-speech system that synthesizes speech across 31 languages at 44.1kHz. It runs entirely on-device with no cloud calls, no API keys, and no GPU required. This launcher ships the official HuggingFace Space web UI and downloads the ONNX model weights locally on first install.
 
-**Requirements:** ~24 GB VRAM (NVIDIA GPU), ~17 GB disk space for models.
-
-> ⚠️ **macOS is not supported.** This launcher will not work on Mac (Apple Silicon or Intel).
+**Highlights:**
+- 31 languages (Arabic, English, Japanese, Korean, French, German, Spanish, and more)
+- 44.1kHz high-quality audio output
+- 10 voice styles (M1–M5, F1–F5)
+- 10 expression tags: `<laugh>`, `<breath>`, `<sigh>`, and more
+- Runs on CPU — no NVIDIA GPU required
+- WebGPU acceleration used automatically when available
 
 ## How to Use
 
-1. Click **Install** to clone the repo and install all dependencies.
-2. Click **Start** to launch the Gradio web UI.
-3. Click **Open Web UI** to open DramaBox in your browser.
+1. Click **Install** — downloads the ONNX model weights (~380 MB) from HuggingFace.
+2. Click **Open Web UI** — opens the Supertonic 3 browser interface.
+3. Type your text, pick a voice and language, and click Generate.
 
-### Low VRAM Mode
+## Supported Languages
 
-Click **Start Low VRAM** to try the experimental MMGP offload wrapper. This keeps the upstream DramaBox code in `/app` untouched and launches through `launch_low_vram.py`, which auto-selects an MMGP profile from detected CUDA VRAM after the original DramaBox server loads its components. It may reduce VRAM pressure at the cost of speed and higher system RAM usage.
+Arabic (`ar`), Bulgarian (`bg`), Croatian (`hr`), Czech (`cs`), Danish (`da`), Dutch (`nl`), English (`en`), Estonian (`et`), Finnish (`fi`), French (`fr`), German (`de`), Greek (`el`), Hindi (`hi`), Hungarian (`hu`), Indonesian (`id`), Italian (`it`), Japanese (`ja`), Korean (`ko`), Latvian (`lv`), Lithuanian (`lt`), Polish (`pl`), Portuguese (`pt`), Romanian (`ro`), Russian (`ru`), Slovak (`sk`), Slovenian (`sl`), Spanish (`es`), Swedish (`sv`), Turkish (`tr`), Ukrainian (`uk`), Vietnamese (`vi`)
 
-### Prompt Writing Guide
+Pass `lang="na"` to let Supertonic detect the language automatically.
 
-**Structure:** `<speaker description>, "<dialogue>" <action direction> "<more dialogue>"`
+## Expression Tags
 
-**Inside quotes** (model produces actual sounds):
-- Laughs: `"Hahaha"` `"Hehehe"`
-- Sounds: `"Mmmmm"` `"Ugh"` `"Argh"` `"Ahhh"` `"Hmm"`
+Inline tags add natural human nuance without reference audio:
 
-**Outside quotes** (stage directions):
-- `She sighs deeply.` · `He gulps nervously.` · `A long pause.`
-
-**Example prompt:**
-```
-A woman speaks warmly, "Hello, how are you today?" She laughs, "Hahaha, it is so good to see you!"
-```
-
-## API
-
-### Python
-
-```python
-from src.inference_server import TTSServer
-
-server = TTSServer(device="cuda")
-server.generate_to_file(
-    prompt='A woman speaks warmly, "Hello, how are you today?"',
-    output="output.wav",
-    voice_ref="reference.wav",   # optional, 10+ seconds
-)
-```
-
-### CLI
-
-```bash
-python src/inference.py \
-  --voice-sample reference.wav \
-  --prompt 'A woman speaks warmly, "Hello, how are you today?"' \
-  --output output.wav \
-  --cfg-scale 2.5 --stg-scale 1.5
-```
-
-### JavaScript
-
-```javascript
-import { Client } from "@gradio/client";
-
-const client = await Client.connect("http://127.0.0.1:7860");
-const result = await client.predict("/generate", {
-  prompt: 'A woman speaks warmly, "Hello, how are you today?"'
-});
-
-console.log(result);
-```
-
-### Python Gradio Client
-
-Once the server is running, use the URL from **Open Web UI** with the Gradio API:
-
-```python
-from gradio_client import Client
-
-client = Client("http://127.0.0.1:7860")
-result = client.predict(
-    prompt='A woman speaks warmly, "Hello, how are you today?"',
-    api_name="/generate"
-)
-```
-
-### Curl
-
-```bash
-curl -X POST http://127.0.0.1:7860/api/predict \
-  -H "Content-Type: application/json" \
-  -d '{"data": ["A woman speaks warmly, \"Hello, how are you today?\""]}'
-```
+| Tag | Effect |
+|-----|--------|
+| `<laugh>` | Laughter |
+| `<breath>` | Audible breath |
+| `<sigh>` | Sigh |
+| `<clear-throat>` | Throat clear |
+| `<cough>` | Cough |
+| `<sneeze>` | Sneeze |
+| `<sniff>` | Sniff |
+| `<groan>` | Groan |
+| `<yawn>` | Yawn |
+| `<hmm>` | Thinking sound |
 
 ## Models
 
-Auto-downloaded on first run from [ResembleAI/Dramabox](https://huggingface.co/ResembleAI/Dramabox):
+Downloaded at install from [Supertone/supertonic-3](https://huggingface.co/spaces/Supertone/supertonic-3) (HuggingFace Space):
 
 | File | Size | Description |
 |------|------|-------------|
-| dramabox-dit-v1.safetensors | 6.6 GB | DiT transformer |
-| dramabox-audio-components.safetensors | 1.9 GB | Audio embeddings + VAE + vocoder |
-| gemma-3-12b-it-bnb-4bit | ~8 GB | Text encoder |
+| vector_estimator.onnx | ~245 MB | Main flow-matching model |
+| vocoder.onnx | ~97 MB | Audio decoder |
+| text_encoder.onnx | ~35 MB | Text encoder |
+| duration_predictor.onnx | ~3.6 MB | Duration predictor |
 
 ## License
 
-DramaBox is distributed under the [LTX-2 Community License](https://github.com/resemble-ai/DramaBox/blob/master/LICENSE). Built on [Lightricks/LTX-2.3](https://huggingface.co/Lightricks/LTX-2.3).
+Sample code: [MIT License](LICENSE). Model weights: [OpenRAIL-M License](https://huggingface.co/Supertone/supertonic-3/blob/main/LICENSE). © 2026 Supertone Inc.
