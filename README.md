@@ -24,6 +24,8 @@ Supertonic 3 is a 99M-parameter ONNX-based text-to-speech system that synthesize
 2. Click **Open Web UI** — opens the Supertonic 3 browser interface.
 3. Type your text, pick a voice and language, and click Generate.
 
+This is a static browser app, so it does not keep a backend process running. To stop using it, close the Web UI tab.
+
 ## Supported Languages
 
 Arabic (`ar`), Bulgarian (`bg`), Croatian (`hr`), Czech (`cs`), Danish (`da`), Dutch (`nl`), English (`en`), Estonian (`et`), Finnish (`fi`), French (`fr`), German (`de`), Greek (`el`), Hindi (`hi`), Hungarian (`hu`), Indonesian (`id`), Italian (`it`), Japanese (`ja`), Korean (`ko`), Latvian (`lv`), Lithuanian (`lt`), Polish (`pl`), Portuguese (`pt`), Romanian (`ro`), Russian (`ru`), Slovak (`sk`), Slovenian (`sl`), Spanish (`es`), Swedish (`sv`), Turkish (`tr`), Ukrainian (`uk`), Vietnamese (`vi`)

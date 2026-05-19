@@ -37,7 +37,7 @@ module.exports = {
         default: true,
         icon: "fa-solid fa-rocket",
         text: "Open Web UI",
-        href: "index.html"
+        href: "index.html?raw=true"
       }, {
         icon: "fa-solid fa-download",
         text: "Models on HuggingFace",
