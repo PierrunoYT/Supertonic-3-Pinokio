@@ -91,7 +91,11 @@ def synthesize(
     )
     elapsed = time.perf_counter() - start_time
 
-    audio = np.asarray(wav, dtype=np.float32)
+    audio = np.asarray(wav, dtype=np.float32).squeeze()
+    if audio.ndim > 1:
+        audio = audio.reshape(-1)
+    audio = np.clip(audio, -1.0, 1.0)
+    audio = (audio * 32767).astype(np.int16)
     duration_seconds = float(np.asarray(duration).reshape(-1)[0]) if np.size(duration) else 0.0
     stats = (
         f"Generated {duration_seconds:.2f}s of audio in {elapsed:.2f}s "
