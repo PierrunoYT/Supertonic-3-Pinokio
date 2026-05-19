@@ -4,14 +4,6 @@ module.exports = {
   },
   run: [
     {
-      when: "{{platform === 'darwin'}}",
-      method: "notify",
-      params: {
-        html: "macOS is not supported. Supertonic 3 requires Windows or Linux."
-      },
-      next: null
-    },
-    {
       method: "shell.run",
       params: {
         venv: "env",
