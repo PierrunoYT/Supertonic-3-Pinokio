@@ -102,7 +102,7 @@ def synthesize(
 
 
 def build_demo() -> gr.Blocks:
-    with gr.Blocks(title="Supertonic 3", theme=gr.themes.Soft()) as demo:
+    with gr.Blocks(title="Supertonic 3") as demo:
         gr.Markdown(
             """
             # Supertonic 3 Gradio
@@ -193,7 +193,7 @@ def build_demo() -> gr.Blocks:
                 custom_style_file,
             ],
             outputs=[audio, stats],
-            api_name=False,
+            api_visibility="private",
         )
 
         gr.Examples(
@@ -230,5 +230,6 @@ if __name__ == "__main__":
     demo.queue(default_concurrency_limit=1).launch(
         server_name=args.host,
         server_port=args.port,
-        show_api=True,
+        theme=gr.themes.Soft(),
+        footer_links=["api", "settings"],
     )
