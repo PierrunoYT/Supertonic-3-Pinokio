@@ -1,5 +1,4 @@
 module.exports = {
-  daemon: true,
   run: [
     {
       method: "web.open",
