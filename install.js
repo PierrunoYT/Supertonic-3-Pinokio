@@ -1,12 +1,9 @@
 module.exports = {
   run: [
     {
-      method: "hf.download",
+      method: "shell.run",
       params: {
-        "_": ["Supertone/supertonic-3"],
-        "repo-type": "space",
-        "include": "assets/onnx/*",
-        "local-dir": "."
+        message: "hf download Supertone/supertonic-3 --type space --include \"assets/onnx/*\" --local-dir ."
       }
     },
     {
