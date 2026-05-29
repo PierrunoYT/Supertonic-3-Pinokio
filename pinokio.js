@@ -1,8 +1,5 @@
 module.exports = {
   version: "5.0",
-  title: "Supertonic 3",
-  description: "Lightning-Fast, On-Device, Multilingual TTS — Gradio, ONNX, 44.1kHz",
-  icon: "icon.jpeg",
   menu: async (kernel, info) => {
     let installed = info.exists("app/env")
     let running = {
