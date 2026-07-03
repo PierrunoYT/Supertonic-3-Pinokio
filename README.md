@@ -126,4 +126,4 @@ Downloaded at install from [Supertone/supertonic-3](https://huggingface.co/space
 
 ## License
 
-Sample code: [MIT License](LICENSE). Model weights: [OpenRAIL-M License](https://huggingface.co/Supertone/supertonic-3/blob/main/LICENSE). © 2026 Supertone Inc.
+Sample code: [MIT License](LICENSE), © 2026 PierrunoYT. Model weights: [OpenRAIL-M License](https://huggingface.co/Supertone/supertonic-3/blob/main/LICENSE), © 2026 Supertone Inc.
