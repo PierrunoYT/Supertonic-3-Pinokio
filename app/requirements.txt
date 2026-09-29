@@ -1,2 +1,2 @@
-gradio
-supertonic
+gradio>=6.0,<7
+supertonic>=1.3,<2
