@@ -11,6 +11,12 @@ module.exports = {
       params: {
         path: "app/models"
       }
+    },
+    {
+      method: "fs.rm",
+      params: {
+        path: "assets/onnx"
+      }
     }
   ]
 }

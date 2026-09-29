@@ -1,4 +1,5 @@
 app/models/
+assets/onnx/
 node_modules/
 .DS_Store
 logs/
