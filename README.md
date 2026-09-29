@@ -94,7 +94,7 @@ curl -X POST http://127.0.0.1:7860/gradio_api/call/synthesize \
 
 Arabic (`ar`), Bulgarian (`bg`), Croatian (`hr`), Czech (`cs`), Danish (`da`), Dutch (`nl`), English (`en`), Estonian (`et`), Finnish (`fi`), French (`fr`), German (`de`), Greek (`el`), Hindi (`hi`), Hungarian (`hu`), Indonesian (`id`), Italian (`it`), Japanese (`ja`), Korean (`ko`), Latvian (`lv`), Lithuanian (`lt`), Polish (`pl`), Portuguese (`pt`), Romanian (`ro`), Russian (`ru`), Slovak (`sk`), Slovenian (`sl`), Spanish (`es`), Swedish (`sv`), Turkish (`tr`), Ukrainian (`uk`), Vietnamese (`vi`)
 
-Pass `lang="na"` to let Supertonic detect the language automatically.
+For text in an unknown or unsupported language, choose **Auto / fallback** (`"na"`). This uses Supertonic's language-agnostic token; it does not detect the language.
 
 ## Expression Tags
 
@@ -115,7 +115,7 @@ Inline tags add natural human nuance without reference audio:
 
 ## Models
 
-Downloaded at install from [Supertone/supertonic-3](https://huggingface.co/spaces/Supertone/supertonic-3) (HuggingFace Space):
+Downloaded at install from the [Supertone/supertonic-3](https://huggingface.co/Supertone/supertonic-3) model repository into `app/models` (removed by **Reset**):
 
 | File | Size | Description |
 |------|------|-------------|
