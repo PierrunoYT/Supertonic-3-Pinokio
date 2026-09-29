@@ -9,7 +9,6 @@ import numpy as np
 from supertonic import TTS
 
 
-SAMPLE_RATE = 44100
 VOICE_CHOICES = ["M1", "M2", "M3", "M4", "M5", "F1", "F2", "F3", "F4", "F5"]
 LANGUAGE_CHOICES = [
     ("Auto / fallback", "na"),
@@ -103,7 +102,7 @@ def synthesize(
         if duration_seconds
         else f"Generated audio in {elapsed:.2f}s"
     )
-    return (SAMPLE_RATE, audio), stats
+    return (get_tts().sample_rate, audio), stats
 
 
 def build_demo() -> gr.Blocks:
