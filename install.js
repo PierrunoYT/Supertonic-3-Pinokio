@@ -8,6 +8,9 @@ module.exports = {
       params: {
         venv: "env",
         path: "app",
+        env: {
+          SUPERTONIC_CACHE_DIR: "models"
+        },
         message: [
           "uv pip install -r requirements.txt",
           "python -c \"from supertonic import TTS; TTS(auto_download=True)\""

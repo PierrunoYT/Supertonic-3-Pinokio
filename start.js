@@ -6,6 +6,9 @@ module.exports = {
       params: {
         venv: "env",
         path: "app",
+        env: {
+          SUPERTONIC_CACHE_DIR: "models"
+        },
         message: [
           "python app.py --host 127.0.0.1 --port {{port}}"
         ],
