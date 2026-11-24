@@ -1,7 +1,7 @@
 {
   "title": "Supertonic 3",
   "description": "Lightning-Fast, On-Device, Multilingual TTS — Gradio, ONNX, 44.1kHz",
-  "icon": "icon.jpeg",
+  "icon": "icon.png",
   "posts": [
     "https://github.com/supertone-inc/supertonic"
   ]

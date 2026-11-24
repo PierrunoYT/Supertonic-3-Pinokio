@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="icon.jpeg" alt="Supertonic 3 logo" width="160" />
+  <img src="icon.png" alt="Supertonic 3 logo" width="160" />
 </p>
 
 # Supertonic 3 — Pinokio Launcher
