@@ -77,17 +77,22 @@ def synthesize(
         raise gr.Error("Enter some text to synthesize.")
 
     start_time = time.perf_counter()
-    style = get_style(voice, custom_style_file)
-    wav, duration = get_tts().synthesize(
-        text=text,
-        voice_style=style,
-        total_steps=int(total_steps),
-        speed=float(speed),
-        max_chunk_length=int(max_chunk_length),
-        silence_duration=float(silence_duration),
-        lang=language,
-        verbose=False,
-    )
+    try:
+        style = get_style(voice, custom_style_file)
+        wav, duration = get_tts().synthesize(
+            text=text,
+            voice_style=style,
+            total_steps=int(total_steps),
+            speed=float(speed),
+            max_chunk_length=int(max_chunk_length),
+            silence_duration=float(silence_duration),
+            lang=language,
+            verbose=False,
+        )
+    except (ValueError, FileNotFoundError) as e:
+        # Unsupported characters, malformed style JSON, etc. Gradio hides plain
+        # exception messages from the UI, so re-raise them as gr.Error.
+        raise gr.Error(str(e)) from e
     elapsed = time.perf_counter() - start_time
 
     audio = np.asarray(wav, dtype=np.float32).squeeze()
@@ -169,33 +174,25 @@ def build_demo() -> gr.Blocks:
         audio = gr.Audio(label="Generated audio", type="numpy", autoplay=True)
         stats = gr.Markdown()
 
+        synth_inputs = [
+            text,
+            voice,
+            language,
+            total_steps,
+            speed,
+            max_chunk_length,
+            silence_duration,
+            custom_style_file,
+        ]
         generate.click(
             fn=synthesize,
-            inputs=[
-                text,
-                voice,
-                language,
-                total_steps,
-                speed,
-                max_chunk_length,
-                silence_duration,
-                custom_style_file,
-            ],
+            inputs=synth_inputs,
             outputs=[audio, stats],
             api_name="synthesize",
         )
         text.submit(
             fn=synthesize,
-            inputs=[
-                text,
-                voice,
-                language,
-                total_steps,
-                speed,
-                max_chunk_length,
-                silence_duration,
-                custom_style_file,
-            ],
+            inputs=synth_inputs,
             outputs=[audio, stats],
             api_visibility="private",
         )
@@ -206,16 +203,7 @@ def build_demo() -> gr.Blocks:
                 ["The startup secured $5.2M in venture capital after a strong public demo.", "F3", "en", 8, 1.1, 300, 0.3, None],
                 ["Use expression tags like <laugh>, <breath>, or <sigh> to add natural detail.", "F1", "en", 10, 1.0, 300, 0.3, None],
             ],
-            inputs=[
-                text,
-                voice,
-                language,
-                total_steps,
-                speed,
-                max_chunk_length,
-                silence_duration,
-                custom_style_file,
-            ],
+            inputs=synth_inputs,
         )
 
     return demo
